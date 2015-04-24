@@ -3,10 +3,16 @@ from django.db import models
 import re 
 
 class Company(models.Model):
-    personal_number = models.CharField(max_length=11)
+    personal_number = models.CharField('персональный номер', max_length=11)
     
     def __str__(self):
         return self.personal_number
+        
+    class Meta:
+        verbose_name = 'компания'
+        verbose_name_plural = 'компании'
+        
+        
         
 class VacancyManager(models.Manager):
 
@@ -21,8 +27,8 @@ class VacancyManager(models.Manager):
            return self.none()
            
 class Vacancy(models.Model):
-    owner = models.ForeignKey(Company)
-    personal_number = models.PositiveIntegerField()
+    owner = models.ForeignKey(Company, verbose_name='компания')
+    personal_number = models.PositiveIntegerField('персональный номер')
     
     objects = VacancyManager()
     
@@ -31,3 +37,8 @@ class Vacancy(models.Model):
     
     def get_personal_number(self):
         return "{}-{}".format(self.owner.personal_number, self.personal_number)
+    get_personal_number.short_description = "Персональный номер"
+    
+    class Meta:
+        verbose_name = 'вакансия'
+        verbose_name_plural = 'вакансии'
