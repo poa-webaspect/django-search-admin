@@ -3,7 +3,6 @@ from django.db import models
 import re 
 
 class Company(models.Model):
-    ...
     personal_number = models.CharField(max_length=11)
     
     def __str__(self):
@@ -22,7 +21,6 @@ class VacancyManager(models.Manager):
            return self.none()
            
 class Vacancy(models.Model):
-    ...
     owner = models.ForeignKey(Company)
     personal_number = models.PositiveIntegerField()
     
