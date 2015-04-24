@@ -11,6 +11,7 @@ admin.site.register(Company, CompanyAdmin)
 class VacancyAdmin(admin.ModelAdmin):
     list_display = ('owner', 'get_personal_number')
     search_fields = ('id',)
+    
     def get_search_results(self, request, queryset, search_term):
        queryset, use_distinct = super().get_search_results(request, queryset, search_term)
        queryset |= self.model.objects.filter_by_personal_number(search_term)
