@@ -2,6 +2,7 @@ from django.db import models
 
 import re 
 
+
 class Company(models.Model):
     personal_number = models.CharField('персональный номер', max_length=11)
     
